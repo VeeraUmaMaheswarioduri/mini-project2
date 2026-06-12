@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Poll Voting App</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <h1>Which JavaScript framework do you prefer?</h1>
+  <canvas id="voteChart"></canvas>
+
+  <div id="buttons">
+    <button onclick="vote('react')">Vote for React</button>
+    <button onclick="vote('angular')">Vote for Angular</button>
+    <button onclick="vote('vue')">Vote for Vue.js</button>
+    <button onclick="vote('svelte')">Vote for Svelte</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

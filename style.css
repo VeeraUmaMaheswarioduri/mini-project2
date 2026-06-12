@@ -1,0 +1,32 @@
+body {
+  font-family: Arial, sans-serif;
+  background: grayish-blue;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  color: darkslategray;
+}
+
+canvas {
+  max-width: 600px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+button {
+  background-color: deepskyblue;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: blue;
+}
