@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voting & Poll App</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    background:white;
+    padding:30px;
+    width:500px;
+    border-radius:15px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+h2{
+    text-align:center;
+}
+
+.option{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    background:#007bff;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.option:hover{
+    background:#0056b3;
+}
+
+#status{
+    text-align:center;
+    color:green;
+    margin-top:10px;
+}
+
+canvas{
+    margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Voting & Poll System</h2>
+
+<h3 id="question">
+Which technology do you prefer?
+</h3>
+
+<button class="option" onclick="vote(0)">React</button>
+<button class="option" onclick="vote(1)">Flutter</button>
+<button class="option" onclick="vote(2)">Angular</button>
+<button class="option" onclick="vote(3)">Vue</button>
+
+<p id="status"></p>
+
+<canvas id="voteChart"></canvas>
+
+</div>
+
+<script>
+
+let options = ["React","Flutter","Angular","Vue"];
+
+let votes =
+JSON.parse(localStorage.getItem("votes")) ||
+[0,0,0,0];
+
+function vote(index){
+
+    if(localStorage.getItem("voted")){
+        alert("You already voted.");
+        return;
+    }
+
+    votes[index]++;
+
+    localStorage.setItem(
+        "votes",
+        JSON.stringify(votes)
+    );
+
+    localStorage.setItem(
+        "voted",
+        "true"
+    );
+
+    document.getElementById("status")
+        .innerHTML =
+        "Vote submitted successfully!";
+
+    updateChart();
+}
+
+const ctx =
+document.getElementById("voteChart");
+
+const chart = new Chart(ctx,{
+    type:"pie",
+    data:{
+        labels:options,
+        datasets:[{
+            data:votes,
+            backgroundColor:[
+                "#36A2EB",
+                "#FF6384",
+                "#FFCE56",
+                "#4BC0C0"
+            ]
+        }]
+    },
+    options:{
+        responsive:true
+    }
+});
+
+function updateChart(){
+
+    chart.data.datasets[0].data =
+    votes;
+
+    chart.update();
+}
+
+updateChart();
+
+</script>
+
+</body>
+</html>
